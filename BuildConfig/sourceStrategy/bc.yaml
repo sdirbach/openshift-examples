@@ -1,0 +1,35 @@
+---
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    labels:
+      build: "example-source-strategy"
+    name: "example-source-strategy"
+  spec: {}
+- apiVersion: v1
+  kind: BuildConfig
+  metadata:
+    labels:
+      build: "example-source-strategy"
+    name: "example-source-strategy"
+  spec:
+    output:
+      to:
+        kind: "ImageStreamTag"
+        name: "example-source-strategy:latest"
+    resources: {}
+    source:
+      git:
+        ref: "master"
+        uri: "https://github.com/sdirbach/openshift-examples.git"
+      contextDir: "BuildConfig/sourceStrategy"
+      type: Git
+    strategy:
+      type: "Source"
+      sourceStrategy:
+        from:
+          kind: "DockerImage"
+          name: "registry.access.redhat.com/rhscl/nginx-18-rhel7"
