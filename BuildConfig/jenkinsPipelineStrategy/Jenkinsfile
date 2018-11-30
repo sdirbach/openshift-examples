@@ -1,0 +1,12 @@
+node('master') {
+  stage('build') {
+    echo 'Building...'
+    openshiftBuild(buildConfig: 'example-docker-strategy', showBuildLogs: 'true')
+  }
+  stage('test') {
+    echo 'Testing...'
+  }
+  stage('deploy') {
+    echo 'Deploying...'
+  }
+}
