@@ -1,7 +1,7 @@
 node('master') {
   stage('build') {
     echo 'Building...'
-    openshiftBuild(buildConfig: 'example-docker-strategy', showBuildLogs: 'true')
+    sh "oc start-build example-docker-strategy -F"
   }
   stage('test') {
     echo 'Testing...'

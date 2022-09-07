@@ -2,14 +2,14 @@
 apiVersion: v1
 kind: List
 items:
-- apiVersion: v1
+- apiVersion: image.openshift.io/v1
   kind: ImageStream
   metadata:
     labels:
       build: "example-git-pipeline-strategy"
     name: "example-git-pipeline-strategy"
   spec: {}
-- apiVersion: v1
+- apiVersion: build.openshift.io/v1
   kind: BuildConfig
   metadata:
     labels:

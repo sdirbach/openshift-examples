@@ -2,14 +2,14 @@
 apiVersion: v1
 kind: List
 items:
-- apiVersion: v1
+- apiVersion: image.openshift.io/v1
   kind: ImageStream
   metadata:
     labels:
       build: "example-local-pipeline-strategy"
     name: "example-local-pipeline-strategy"
   spec: {}
-- apiVersion: v1
+- apiVersion: build.openshift.io/v1
   kind: BuildConfig
   metadata:
     labels:
@@ -27,7 +27,7 @@ items:
           node('master') {
             stage('build') {
               echo 'Building...'
-              openshiftBuild(buildConfig: 'example-docker-strategy', showBuildLogs: 'true')
+              sh "oc start-build example-docker-strategy -F"
             }
             stage('test') {
               echo 'Testing...'
