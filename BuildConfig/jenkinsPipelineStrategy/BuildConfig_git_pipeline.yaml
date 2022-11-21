@@ -3,28 +3,27 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   labels:
-    build: "example-docker-strategy"
-  name: "example-docker-strategy"
+    build: "example-git-pipeline-strategy"
+  name: "example-git-pipeline-strategy"
 spec: {}
 ---
 apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    build: "example-docker-strategy"
-  name: "example-docker-strategy"
+    build: "example-git-pipeline-strategy"
+  name: "example-git-pipeline-strategy"
 spec:
   output:
     to:
       kind: "ImageStreamTag"
-      name: "example-docker-strategy:latest"
+      name: "example-git-pipeline-strategy:latest"
   resources: {}
   source:
     git:
       ref: "master"
       uri: "https://github.com/sdirbach/openshift-examples.git"
-    contextDir: "BuildConfig/dockerStrategy"
     type: Git
   strategy:
-    dockerStrategy:
-    type: Docker
+    jenkinsPipelineStrategy:
+      jenkinsfilePath: "BuildConfig/jenkinsPipelineStrategy/Jenkinsfile"
