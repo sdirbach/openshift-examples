@@ -24,7 +24,7 @@ spec:
         app: example-docker-strategy
     spec:
       containers:
-      - image: image-registry.openshift-image-registry.svc:5000/jenkins/example-docker-strategy:latest
+      - image: example-docker-strategy:latest
         imagePullPolicy: IfNotPresent
         name: container
         ports:
@@ -47,6 +47,5 @@ spec:
       from:
         kind: ImageStreamTag
         name: example-docker-strategy:latest
-        namespace: jenkins
     type: ImageChange
   - type: ConfigChange
